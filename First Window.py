@@ -1,7 +1,8 @@
 import sys
 
-from PyQt5.QtWidgets import QApplication, QWidget, QToolTip, QPushButton
+from PyQt5.QtWidgets import QApplication, QWidget, QToolTip, QPushButton, QLabel
 from PyQt5.QtGui import QFont
+from PyQt5.QtCore import QCoreApplication
 
 
 class MyWindow(QWidget):
@@ -11,6 +12,7 @@ class MyWindow(QWidget):
         self.initUI()  # 绘制界面的方法，直接初始化中完成。
 
     def initUI(self):
+        # 设置窗口大小
         self.setGeometry(300, 300, 300, 220)
         self.setWindowTitle('MyWindow')
         # 设置字体使用静态方法
@@ -21,7 +23,17 @@ class MyWindow(QWidget):
         btn = QPushButton('Button', self)
         btn.setToolTip('This is a button!')
         btn.resize(btn.sizeHint())
-        btn.move(50,50)
+        btn.move(50,10) # 设置按钮位置
+
+        # 创建退出按钮
+        btnquit = QPushButton('Quit', self)
+        btnquit.clicked.connect(QCoreApplication.instance().quit)
+        btnquit.resize(btnquit.sizeHint())
+        btnquit.move(50,40)
+
+        # 创建label
+        lbl1 = QLabel('This is a label',self)
+        lbl1.move(50,60)
 
         self.show()
 
